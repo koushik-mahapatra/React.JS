@@ -1,71 +1,59 @@
-///// Date Counter V-1 /////
-
-// import { useState } from "react";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Counter />
-//     </div>
-//   );
-// }
-
-// function Counter() {
-//   const date = new Date("february 01 2024");
-//   const [step, setStep] = useState(0);
-//   const [count, setCount] = useState(step);
-
-//   date.setDate(date.getDate() + count);
-//   return (
-//     <div>
-//       <div>
-//         <button onClick={() => setStep((s) => s - 1)}>-</button>
-//         <span>Step:{step} </span>
-//         <button onClick={() => setStep((s) => s + 1)}>+</button>
-//       </div>
-
-//       <div>
-//         <button onClick={() => setCount((c) => c - step)}>-</button>
-//         <span>Count:{count} </span>
-//         <button onClick={() => setCount((c) => c + step)}>+</button>
-//       </div>
-
-//       <p>
-//         <span>
-//           {count === 0
-//             ? "Today is "
-//             : count > 0
-//             ? `${count} days from today will `
-//             : `${Math.abs(count)} days ago was `}
-//         </span>
-//         <span>{date.toDateString()}</span>
-//       </p>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-/// Date Counter V-2 ///
-
 import { useState } from "react";
 
 export default function App() {
-  return <Counter />;
+  return (
+    <div className="App">
+      <Counter />
+      <Counter2 />
+    </div>
+  );
 }
 
 function Counter() {
+  const [step, setStep] = useState(0);
+  const [count, setCount] = useState(step);
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+  return (
+    <div>
+      <h2 style={{ color: "#d43dac" }}>Date Counter Version : 1</h2>
+      <div>
+        <button onClick={() => setStep((step) => step - 1)}>-</button>
+        <span>Steps : {step}</span>
+        <button onClick={() => setStep((step) => step + 1)}>+</button>
+      </div>
+      <div>
+        <button onClick={() => setCount((count) => count - step)}>-</button>
+        <span>Count: {count}</span>
+        <button onClick={() => setCount((count) => count + step)}>+</button>
+      </div>
+      <p>
+        <span>
+          {count === 0
+            ? "Today is: "
+            : count > 0
+            ? `${count} days from now will: `
+            : `${Math.abs(count)} days ago was: `}
+        </span>
+        <span style={{ color: "#9927db" }}>{date.toDateString()}</span>
+      </p>
+    </div>
+  );
+}
+
+function Counter2() {
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(0);
   const date = new Date();
   date.setDate(date.getDate() + count);
-
   function handleReset() {
     setStep(1);
     setCount(0);
   }
   return (
-    <div className="App">
+    <div>
+      <h2 style={{ color: "#d43d72" }}>Date Counter Version : 2</h2>
+
       <div>
         <input
           type="range"
@@ -74,8 +62,9 @@ function Counter() {
           value={step}
           onChange={(e) => setStep(Number(e.target.value))}
         />
-        <span>Step: {step}</span>
+        <span> Steps: {step}</span>
       </div>
+
       <div>
         <button onClick={() => setCount((c) => c - step)}>-</button>
         <input
@@ -86,15 +75,17 @@ function Counter() {
         <button onClick={() => setCount((c) => c + step)}>+</button>
       </div>
       <p>
-        {count === 0
-          ? "Today is "
-          : count > 0
-          ? `${count} days from today will `
-          : `${Math.abs(count)} days ago was `}
-        <span>{date.toDateString()}</span>
+        <span>
+          {count === 0
+            ? "Today is: "
+            : count > 0
+            ? `${count} days from today will: `
+            : `${Math.abs(count)} days ago was: `}
+        </span>
+        <span style={{ color: "#15d646" }}>{date.toDateString()}</span>
       </p>
       <div>
-        {count !== 0 || step !== 1 ? (
+        {step !== 1 || count !== 0 ? (
           <button onClick={handleReset}>Reset</button>
         ) : null}
       </div>
